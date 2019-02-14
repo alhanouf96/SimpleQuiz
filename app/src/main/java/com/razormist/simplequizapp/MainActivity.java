@@ -33,14 +33,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int questionLength = question.questions.length;
 
 
-    Random random;
+   // Random random;
+    int x=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        random = new Random();
+    //    random = new Random();
 
 
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_question = (TextView)findViewById(R.id.tv_question);
         res = (TextView)findViewById(R.id.ress);
 
-            NextQuestion(random.nextInt(questionLength));
+            NextQuestion(x);
 
     }
 
@@ -70,30 +71,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_one:
                 if(btn_one.getText()== answer && tv_question.getText() == prgg) {
                    P++ ;
-                    NextQuestion(random.nextInt(questionLength)); }
+                   ++x;
+                    NextQuestion(x); }
 
                 else if (btn_one.getText()==answer && tv_question.getText() == dess) {
                     D++;
-                NextQuestion(random.nextInt(questionLength));}
+                    ++x;
+                NextQuestion(x);}
 
                 else {
-                    NextQuestion(random.nextInt(questionLength));
+                    ++x;
+                    NextQuestion(x);
                 }
             break;
 
             case R.id.btn_two:
                  if(btn_two.getText()==answer && tv_question.getText() == prgg) {
                     P++;
-                    NextQuestion(random.nextInt(questionLength));}
+                     ++x;
+                    NextQuestion(x);}
 
                 else if (btn_two.getText()==answer && tv_question.getText() == dess){
                     D++;
-                    NextQuestion(random.nextInt(questionLength));
+                     ++x;
+                    NextQuestion(x);
 
                 }
                 else  {
-
-                    NextQuestion(random.nextInt(questionLength));
+                     ++x;
+                    NextQuestion(x);
 
                 }
 
