@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RadioGroup;
 
 import java.util.Random;
 
@@ -20,11 +21,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tv_question , res;
 
     private Question question = new Question();
-
+    private RadioGroup mRadioGroup;
 
     public static int P;
     public static int D;
-    private String answer;
+   // private String answer;
     private String prgg;
     private String dess;
 
@@ -32,31 +33,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private int questionLength = question.questions.length;
 
+    int x=0;
 
-    Random random;
+   // Random random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        random = new Random();
+       // random = new Random();
 
-
+        mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup2);
 
         btn_one = (RadioButton)findViewById(R.id.btn_one);
-        btn_one.setOnClickListener(this);
+       // btn_one.setOnClickListener(this);
         btn_two = (RadioButton)findViewById(R.id.btn_two);
-        btn_two.setOnClickListener(this);
+      //  btn_two.setOnClickListener(this);
 
 
         bt = (Button)findViewById(R.id.but1);
-      //  bt.setOnClickListener(this);
+        bt.setOnClickListener(this);
 
         tv_question = (TextView)findViewById(R.id.tv_question);
         res = (TextView)findViewById(R.id.ress);
 
-            NextQuestion(random.nextInt(questionLength));
+
+        NextQuestion(x);
 
     }
 
@@ -66,41 +69,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onClick(View v) {
 
-        switch (v.getId()){
-            case R.id.btn_one:
-                if(btn_one.getText()== answer && tv_question.getText() == prgg) {
-                   P++ ;
-                    NextQuestion(random.nextInt(questionLength)); }
 
-                else if (btn_one.getText()==answer && tv_question.getText() == dess) {
-                    D++;
-                NextQuestion(random.nextInt(questionLength));}
+        if (btn_one.isChecked() && tv_question.getText() == prgg) {
+            P++;
+            ++x;
+            NextQuestion(x);
 
-                else {
-                    NextQuestion(random.nextInt(questionLength));
-                }
-            break;
+        }
+        else if (btn_one.isChecked()  && tv_question.getText() == dess) {
+            D++;
+            ++x;
+            NextQuestion(x);
+        }
 
-            case R.id.btn_two:
-                 if(btn_two.getText()==answer && tv_question.getText() == prgg) {
-                    P++;
-                    NextQuestion(random.nextInt(questionLength));}
+        else if(btn_two.isChecked()) {
+            ++x;
+            NextQuestion(x);
 
-                else if (btn_two.getText()==answer && tv_question.getText() == dess){
-                    D++;
-                    NextQuestion(random.nextInt(questionLength));
+        }
+        else if(!btn_one.isChecked() || !btn_two.isChecked()){
 
-                }
-                else  {
-
-                    NextQuestion(random.nextInt(questionLength));
-
-                }
+            Toast.makeText(MainActivity.this, "Please Select .... ", Toast.LENGTH_SHORT).show();
+        }
 
 
-                break;
 
-        }}
+        mRadioGroup.clearCheck();
+    }
 
 
 
@@ -112,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_two.setText(question.getchoice2(num));
 
 
-        answer = question.getCorrectAnswer(num);
+       // answer = question.getCorrectAnswer(num);
         prgg=question.prg(num);
         dess=question.des(num);
 
