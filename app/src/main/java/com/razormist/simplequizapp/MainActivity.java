@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     RadioButton btn_one, btn_two;
-    Button bt;
+    Button bt , btR;
 
     TextView tv_question , res;
 
@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bt = (Button)findViewById(R.id.but1);
         bt.setOnClickListener(this);
+
+        btR = (Button)findViewById(R.id.res);
+
 
         tv_question = (TextView)findViewById(R.id.tv_question);
         res = (TextView)findViewById(R.id.ress);
@@ -101,7 +104,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
      private void NextQuestion(int num){
+           if(x==5){
+               bt.setVisibility(View.INVISIBLE);
+               tv_question.setVisibility(View.INVISIBLE);
+               btn_one.setVisibility(View.INVISIBLE);
+               btn_two.setVisibility(View.INVISIBLE);
 
+               btR.setVisibility(View.VISIBLE);
+               res.setVisibility(View.VISIBLE);
+
+
+           }
         tv_question.setText(question.getQuestion(num));
         btn_one.setText(question.getchoice(num));
         btn_two.setText(question.getchoice2(num));
@@ -114,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void resultt(View view) {
+
         if (P > D ) {
             res.setText("You are good with Programming");
         }
